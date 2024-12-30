@@ -32,7 +32,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'type'
+        'role', // Mengubah dari 'type' ke 'role' agar lebih deskriptif
+        'NIK', // Menambahkan NIK agar dapat diisi
+        'address', // Menambahkan address agar dapat diisi
+        'phone_number', // Menambahkan phone u
     ];
 
     /**

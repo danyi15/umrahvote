@@ -54,19 +54,24 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-            if (auth()->user()->type == 'admin') {
-                return redirect()->route('admin.adminHome');
-            }else if (auth()->user()->type == 'manager') {
-                return redirect()->route('manager.home');
-            }else{
-                return redirect()->route('voter.home');
-            }
-        }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
-        }
+        if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) {
+            $userType = auth()->user()->type;
 
+            // Tentukan rute berdasarkan tipe pengguna
+            if ($userType == 'admin') {
+                return redirect()->route('admin.adminHome')
+                    ->with('success', 'Berhasil login sebagai Admin.');
+            } elseif ($userType == 'manager') {
+                return redirect()->route('manager.home')
+                    ->with('success', 'Berhasil login sebagai Manager.');
+            } else {
+                return redirect()->route('voter.home')
+                    ->with('success', 'Berhasil login sebagai Pemilih.');
+            }
+        } else {
+            // Gagal login
+            return redirect()->route('login')
+                ->with('error', 'Email atau Password salah. Silakan coba lagi.');
+        }
     }
 }

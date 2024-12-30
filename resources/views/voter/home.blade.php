@@ -17,4 +17,24 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if(session('success'))
+    Swal.fire({
+        icon: "success",
+        title: "BERHASIL",
+        text: "{{ session('success') }}",
+        showConfirmButton: false,
+        timer: 2000
+    });
+    @elseif(session('error'))
+    Swal.fire({
+        icon: "error",
+        title: "GAGAL!",
+        text: "{{ session('error') }}",
+        showConfirmButton: false,
+        timer: 2000
+    });
+    @endif
+</script>
 @endsection

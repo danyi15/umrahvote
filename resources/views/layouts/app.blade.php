@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'UmrahVote') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -19,29 +19,32 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-100">
-    <div id="app">
-        <nav class="bg-white shadow-md">
-            <div class="container mx-auto flex justify-between items-center py-4 px-6">
-                <a href="{{ url('/') }}" class="text-2xl font-semibold text-blue-600">UMRAH VOTE</a>
+<body class="bg-gray-100 flex flex-col min-h-screen">
 
-                <div class="space-x-4 flex items-center">
+    <div id="app" class="flex-grow">
+        <nav class="bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md">
+            <div class="container mx-auto flex justify-between items-center py-4 px-6">
+                <!-- Logo -->
+                <a href="{{ url('/') }}" class="text-2xl font-semibold text-white hover:text-gray-200 transition duration-300">UMRAH VOTE</a>
+
+                <!-- Menu -->
+                <div class="space-x-6 flex items-center">
                     @guest
-                        <a href="{{ route('login') }}" class="text-gray-600 hover:text-blue-600">Login</a>
-                        <a href="{{ route('register') }}" class="text-gray-600 hover:text-blue-600">Register</a>
+                        <a href="{{ route('login') }}" class="text-white hover:text-gray-200 transition duration-300">Login</a>
+                        <a href="{{ route('register') }}" class="text-white hover:text-gray-200 transition duration-300">Register</a>
                     @else
-                    <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-blue-600">Dashboard</a>
+                    <a href="{{ route('dashboard') }}" class="text-white hover:text-gray-200 transition duration-300">Dashboard</a>
                         @if (Auth::user()->hasRole('admin'))
-                            <a href="{{ route('admin.users.index') }}" class="text-gray-600 hover:text-blue-600">Manajemen Pengguna</a>
-                            <a href="{{ route('admin.candidate.index') }}" class="text-gray-600 hover:text-blue-600">Manajemen Kandidat</a>
+                            <a href="{{ route('admin.users.index') }}" class="text-white hover:text-gray-200 transition duration-300">Manajemen Pengguna</a>
+                            <a href="{{ route('admin.candidate.index') }}" class="text-white hover:text-gray-200 transition duration-300">Manajemen Kandidat</a>
                         @elseif (Auth::user()->hasRole('user'))
-                            <a href="{{ route('voter.showpilihan') }}" class="text-gray-600 hover:text-blue-600">Pilih Kandidat</a>
+                            <a href="{{ route('voter.showpilihan') }}" class="text-white hover:text-gray-200 transition duration-300">Pilih Kandidat</a>
                         @endif
 
                         <div class="relative">
-                            <button class="text-gray-600 hover:text-blue-600 flex items-center space-x-2" id="userDropdownButton" aria-expanded="false" aria-haspopup="true">
+                            <button class="text-white flex items-center space-x-2" id="userDropdownButton" aria-expanded="false" aria-haspopup="true">
                                 <span>{{ Auth::user()->name }}</span>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.828l3.71-3.63a.75.75 0 111.04 1.08l-4.25 4.17a.75.75 0 01-1.04 0l-4.25-4.17a.75.75 0 01-.02-1.06z" clip-rule="evenodd"></path>
                                 </svg>
                             </button>
@@ -60,7 +63,7 @@
         </nav>
 
 
-
+        <!-- Main Content -->
         <main class="py-4">
             @yield('content')
         </main>
@@ -85,5 +88,14 @@
             }
         });
     </script>
+
+    <!-- Footer -->
+    <footer class="bg-indigo-500 text-white text-center py-4 mt-12">
+        <div class="container">
+            <p class="text-sm">&copy; {{ date('Y') }} Umrah Vote. All rights reserved.</p>
+            <p class="text-sm">Made with by DA</p>
+        </div>
+    </footer>
+
 </body>
 </html>

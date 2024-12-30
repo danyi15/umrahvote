@@ -15,10 +15,20 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next, $userType): Response
     {
-        if(auth()->user()->type == $userType){
+        if (auth()->user()->type == $userType) {
             return $next($request);
         }
-          
-        return response()->json(['You do not have permission to access for this page.']);
+
+        // Mengembalikan tampilan error dengan pesan
+        if ($request->wantsJson()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Maaf, Anda Tidak Memilik Akses Kehalaman Ini.',
+                'code' => 403
+            ], 403);
+        }
+
+        // Jika bukan request JSON, alihkan pengguna ke halaman error
+        return redirect()->route('errorPage')->with('error_message', 'Anda Tidak Memilik Akses Kehalaman Ini.');
     }
 }

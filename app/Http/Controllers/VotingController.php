@@ -4,15 +4,35 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\Candidate;
 use App\Models\Vote;
-
+use App\Events\VoteUpdated;
 
 
 class VotingController extends Controller
 {
+
+    public function vote(Request $request)
+    {
+    $candidateId = $request->input('candidate_id');
+    $candidate = Candidate::find($candidateId);
+
+    if (!$candidate) {
+        return response()->json(['error' => 'Candidate not found.'], 404);
+    }
+
+    $candidate->votes += 1;
+    $candidate->save();
+
+    Log::info('Vote Updated:', ['candidate' => $candidate]);
+    // Trigger event broadcasting
+    broadcast(new VoteUpdated($candidate));
+
+    return response()->json(['message' => 'Vote recorded successfully.', 'candidate' => $candidate]);
+
+}
    public function store(Request $request)
     {
         // Validasi input

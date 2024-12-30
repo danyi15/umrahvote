@@ -11,16 +11,20 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-         // Ambil semua kandidat beserta jumlah suara (votes)
-    $candidates = Candidate::withCount('votes')  // Menghitung jumlah votes terkait kandidat
-    ->get();
-
-    return view('dashboard', compact('candidates'));
         // Mengambil data total pengguna
-        $totalUsers = User::count();
+        $totalUsers = User::where('role', '!=', 'admin')->count();
 
         // Mengambil data total pemilih yang sudah memilih
-        $totalVoters = Vote::count();  // Asumsi Vote adalah tabel yang menyimpan data pemilih
+        $totalVoters = Vote::whereNotNull('candidate_id')
+        ->whereHas('user', function($query) {
+            $query->where('role', '!=', 'admin');
+        })
+        ->count();
+
+        // Mengambil data pemilih yang belum memilih (kecuali admin)
+        $totalVotersNotVoted = User::doesntHave('vote')
+                ->where('role', '!=', 'admin')
+                ->count();
 
         // Mengambil data total kandidat
         $totalCandidates = Candidate::count();
@@ -28,6 +32,7 @@ class DashboardController extends Controller
         // Mengambil statistik suara untuk setiap kandidat
         $candidates = Candidate::withCount('votes')->get(); // Mengambil data kandidat beserta jumlah suara
 
-        return view('dashboard', compact('totalUsers', 'totalVoters', 'totalCandidates', 'candidates'));
+        return view('dashboard', compact('totalUsers', 'totalVoters', 'totalVotersNotVoted', 'totalCandidates', 'candidates'));
     }
 }
+

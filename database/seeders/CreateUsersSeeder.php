@@ -24,7 +24,7 @@ class CreateUsersSeeder extends Seeder
             ],
             [
                'name'=>'Manager User',
-               'email'=>'manager@itsolutionstuff.com',
+               'email'=>'manager@user.com',
                'type'=> 2,
                'password'=> bcrypt('123456'),
             ],

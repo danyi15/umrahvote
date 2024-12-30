@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class CandidateController extends Controller
 {
+    public function show($id)
+    {
+        $candidate = Candidate::findOrFail($id);
+        return view('voter.showdetail', compact('candidate'));
+    }
+
     public function dashboard()
     {
         $candidates = Candidate::withCount('votes')->get();

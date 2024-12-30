@@ -38,6 +38,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/voter', [CandidateController::class, 'show'])->name('voter.show');
     Route::get('/voter/showpilihan', [CandidateController::class, 'showPilihan'])->name('voter.showpilihan');
 
+    Route::get('/candidate/{id}', [CandidateController::class, 'show'])->name('voter.showdetail');
+
     // Route untuk menyimpan suara
     Route::post('/voter/vote', [VotingController::class, 'store'])->name('vote.store');
 });
@@ -72,9 +74,19 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
 /*------------------------------------------
 | Shared Routes (Profile and Settings)
 --------------------------------------------*/
-Route::middleware(['auth'])->group(function () {
 
-    // Profil pengguna
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit'); // Halaman edit
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update'); // Update profil
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 });
+
+
+
+Route::get('/error', function () {
+    return view('errorPage');
+})->name('errorPage');
+
+
 
