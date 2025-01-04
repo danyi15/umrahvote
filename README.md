@@ -7,6 +7,7 @@ Mata Kuliah : Sistem Terdistribusi
 Dosen Pengampu: Hendra Kurniawan, S. Kom, M. Sc. Eng
 
 Di Susun Oleh:
+ 
  NAMA: DANYI APRIZAL          
  NIM : 2201020027
  NAMA: RAVELIANA                   
