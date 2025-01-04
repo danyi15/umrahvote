@@ -7,8 +7,8 @@
 
         <!-- Hero Section with Welcome Message and Call to Action -->
         <div class="bg-white rounded-lg shadow-md p-8 text-center mb-12">
-            <h2 class="text-3xl font-bold text-blue-600 mb-4">Selamat Datang di Sistem Pemilu Kami</h2>
-            <p class="text-gray-700 text-lg mb-6">Kami mengajak Anda untuk berpartisipasi aktif dalam pemilihan umum dengan memilih kandidat terbaik yang akan membawa perubahan positif. Bergabunglah dengan kami dan pilih dengan bijak!</p>
+            <h2 class="text-3xl font-bold text-blue-600 mb-4">Selamat Datang di Sistem Pemilihan Kami</h2>
+            <p class="text-gray-700 text-lg mb-6">Kami mengajak Anda untuk berpartisipasi aktif dalam pemilihan dengan memilih kandidat terbaik yang akan membawa perubahan positif. Bergabunglah dengan kami dan pilih dengan bijak!</p>
 
             <!-- Himbauan untuk Mendaftar -->
             <div class="mb-6">
@@ -25,7 +25,7 @@
         <!-- Himbauan Memilih Kandidat yang Baik -->
         <div class="bg-white rounded-lg shadow-md p-8 text-center">
             <h3 class="text-2xl font-semibold text-blue-600 mb-4">Pilih Kandidat yang Baik</h3>
-            <p class="text-gray-700 text-lg mb-6">Pemilu adalah kesempatan Anda untuk menentukan masa depan. Pilihlah kandidat yang memiliki integritas, visi, dan misi yang jelas untuk kepentingan bersama.</p>
+            <p class="text-gray-700 text-lg mb-6">Pemilihan adalah kesempatan Anda untuk menentukan masa depan. Pilihlah kandidat yang memiliki integritas, visi, dan misi yang jelas untuk kepentingan bersama.</p>
             <a href="{{ route('voter.showpilihan') }}" class="inline-block bg-green-600 text-white py-2 px-6 rounded-md hover:bg-green-700 transition duration-300">Mulai Memilih</a>
         </div>
 

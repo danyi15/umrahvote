@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('address')->default('Unknown Address');
             $table->string('phone_number')->default('0000000000');
             $table->enum('role', ['admin', 'user', 'manager user'])->default('user');
+            $table->timestamp('profile_updated_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

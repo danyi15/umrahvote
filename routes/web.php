@@ -11,8 +11,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VotingController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view ('welcome');
 });
+
 
 use App\Http\Controllers\DashboardController;
 
@@ -26,8 +27,6 @@ Auth::routes();
 | All Normal Users (Voters) Routes
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:user'])->group(function () {
-
-    Route::get('/home', [HomeController::class, 'index'])->name('voter.home');
 
     // Home untuk voter
     Route::get('/voter/home', [HomeController::class, 'index'])->name('voter.home');
@@ -51,6 +50,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.adminHome');
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+
+    // Rute untuk mengedit dan menghapus pengguna
+    Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
     // Route untuk mengelola kandidat
     Route::prefix('admin/candidate')->group(function () {

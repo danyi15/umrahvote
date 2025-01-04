@@ -38,7 +38,15 @@
                             <a href="{{ route('admin.users.index') }}" class="text-white hover:text-gray-200 transition duration-300">Manajemen Pengguna</a>
                             <a href="{{ route('admin.candidate.index') }}" class="text-white hover:text-gray-200 transition duration-300">Manajemen Kandidat</a>
                         @elseif (Auth::user()->hasRole('user'))
-                            <a href="{{ route('voter.showpilihan') }}" class="text-white hover:text-gray-200 transition duration-300">Pilih Kandidat</a>
+                            <!-- Cek Profil Pengguna -->
+                            @php
+                                $user = Auth::user();
+                            @endphp
+                            @if($user->address === 'Unknown Address' || $user->phone_number === '0000000000' || $user->NIK === 0)
+                                <span class="text-yellow-500">Pilih Kandidat</span>
+                            @else
+                                <a href="{{ route('voter.showpilihan') }}" class="text-white hover:text-gray-200 transition duration-300">Pilih Kandidat</a>
+                            @endif
                         @endif
 
                         <div class="relative">
@@ -61,7 +69,6 @@
                 </div>
             </div>
         </nav>
-
 
         <!-- Main Content -->
         <main class="py-4">

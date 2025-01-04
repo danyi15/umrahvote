@@ -3,15 +3,15 @@
 @section('content')
 <main class="bg-white-50 dark:bg-white-900 py-8 px-6">
     <div style="position: relative; padding-top: 56.25%; overflow: hidden; background-color: #f4f4f4; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-        <iframe src="http://localhost/realtimepart/"
+        {{-- <iframe src="http://localhost:8000/realtimepart"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
-    </div>
+    </div> --}}
     <div class="max-w-7xl mx-auto" hidden>
         <!-- Dashboard Header -->
-        <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 mb-6">
+         <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8 mb-6">
             <h2 class="text-3xl font-semibold text-blue-600 dark:text-blue-500">Dashboard</h2>
             <p class="text-black-600 dark:text-black-300 mt-2">Selamat datang, {{ Auth::user()->name }}! Berikut adalah statistik pemungutan suara dan data pengguna.</p>
         </div>

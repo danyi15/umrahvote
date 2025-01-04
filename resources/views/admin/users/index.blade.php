@@ -13,6 +13,7 @@
                 <th class="px-4 py-2 text-left text-gray-600">Email</th>
                 <th class="px-4 py-2 text-left text-gray-600">Status</th>
                 <th class="px-4 py-2 text-left text-gray-600">Created At</th>
+                <th class="px-4 py-2 text-left text-gray-600">Aksi</th> <!-- Kolom Aksi -->
             </tr>
         </thead>
         <tbody>
@@ -31,17 +32,52 @@
                                 </button>
                             @else
                                 <button class="bg-red-600 text-white px-4 py-2 rounded">
-                                    Belum 
+                                    Belum
                                 </button>
                             @endif
                         </td>
-
                         <td class="px-4 py-2">{{ $user->created_at->format('Y-m-d H:i') }}</td>
+                        <td class="px-4 py-2 flex space-x-2"> <!-- Kolom Aksi -->
+                            <!-- Link Edit dengan rute admin.users.edit -->
+                            <a href="{{ route('admin.users.edit', $user->id) }}" class="bg-blue-600 text-white px-4 py-2 rounded">Edit</a>
+
+                            <!-- Form untuk Hapus dengan rute admin.users.destroy -->
+                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Hapus</button>
+                            </form>
+                        </td>
                     </tr>
                 @endif
             @endforeach
         </tbody>
-
     </table>
+
+    <!-- Pagination links -->
+    <div class="mt-4">
+        {{ $users->links() }}
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if(session('success'))
+    Swal.fire({
+        icon: "success",
+        title: "BERHASIL",
+        text: "{{ session('success') }}",
+        showConfirmButton: false,
+        timer: 2000
+    });
+    @elseif(session('error'))
+    Swal.fire({
+        icon: "error",
+        title: "GAGAL!",
+        text: "{{ session('error') }}",
+        showConfirmButton: false,
+        timer: 2000
+    });
+    @endif
+</script>
 @endsection

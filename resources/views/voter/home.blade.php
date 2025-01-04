@@ -7,6 +7,19 @@
         <p class="text-lg text-gray-600 mb-12">Silakan pilih kandidat untuk memberikan suara Anda.</p>
     </div>
 
+    <!-- Cek apakah profil lengkap -->
+    @php
+        $user = Auth::user();
+    @endphp
+    @if($user->address === 'Unknown Address' || $user->phone_number === '0000000000' || $user->NIK === 0)
+    <div class="alert alert-warning text-center mb-6">
+        <p class="text-yellow-600">Silakan lengkapi profil Anda terlebih dahulu sebelum memilih kandidat.</p>
+        <br>
+        <a href="{{ route('profile.edit') }}" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-full">
+            Lengkapi Profil
+        </a>
+    </div>
+    @else
     <!-- Kandidat Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Tombol Pilih Kandidat -->
@@ -16,7 +29,9 @@
             </a>
         </div>
     </div>
+    @endif
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     @if(session('success'))
