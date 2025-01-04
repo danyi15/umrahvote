@@ -10,6 +10,7 @@ Di Susun Oleh:
  
  NAMA: DANYI APRIZAL          
  NIM : 2201020027
+ 
  NAMA: RAVELIANA                   
  NIM : 2201020037
 
